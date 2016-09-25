@@ -4,42 +4,6 @@
 import sys
 from calcoohija import CalculadoraHija
 
-def sumaN(listaops):
-    op_aux = 0
-
-    for op_n in listaops:
-        result = op_aux + int(op_n)
-        op_aux = result
-
-    return result
-
-def restaN(listaops):    
-    op_aux = int(listaops[0])
-
-    for op_n in listaops[1:]:
-        result = op_aux - int(op_n)
-        op_aux = result
-
-    return result
-
-def multN(listaops):
-    op_aux = 1
-
-    for op_n in listaops:
-        result = op_aux * int(op_n)
-        op_aux = result
-
-    return result
-
-def divideN(listaops):
-    op_aux = int(listaops[0])
-
-    for op_n in listaops[1:]:
-        result = op_aux / int(op_n)
-        op_aux = result
-
-    return result
-
 calculadorahija = CalculadoraHija()
 
 fichero_calcs = open(sys.argv[1], 'r')
@@ -51,18 +15,33 @@ for linea in lineas:
     operandos = elems[1:]
 
     if elems[0] == "suma":
-        resultado = sumaN(operandos)
+        op_aux = 0
+        for operando in operandos:
+            op_aux = calculadorahija.suma(op_aux, int(operando))
+
+        print(op_aux)
     elif elems[0] == "resta":
-        resultado = restaN(operandos)  
+        op_aux = int(operandos[0])
+        for operando in operandos[1:]:
+            op_aux = calculadorahija.resta(op_aux, int(operando))
+
+        print(op_aux)
     elif elems[0] == "multiplica":
-        resultado = multN(operandos)  
+        op_aux = 1
+        for operando in operandos:
+            op_aux = calculadorahija.mult(op_aux, int(operando))
+
+        print(op_aux)
     elif elems[0] == "divide":
         try:
-            resultado = divideN(operandos)  
+            op_aux = int(operandos[0])
+            for operando in operandos[1:]:
+                op_aux = calculadorahija.divide(op_aux, int(operando))
+
+            print(op_aux) 
         except ZeroDivisionError:
-            sys.exit("Error: Division by zero is not allowed") 
-    else:
+            sys.exit("Error: Division by zero is not allowed")
+    else: 
         print('Operacion no valida. Operaciones disponibles:' + 
             ' "suma", "resta", "multiplica" y "divide".')
 
-    print(resultado) 
