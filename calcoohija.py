@@ -4,6 +4,7 @@
 import sys
 from calcoo import Calculadora
 
+
 class CalculadoraHija(Calculadora):
 
     def mult(self, op1, op2):
@@ -20,7 +21,7 @@ if __name__ == "__main__":
         operando2 = int(sys.argv[3])
     except ValueError:
         sys.exit("Error: Non numerical parameters")
-    
+
     if sys.argv[2] == "suma":
         resultado = calculadorahija.suma(operando1, operando2)
     elif sys.argv[2] == "resta":
@@ -36,4 +37,3 @@ if __name__ == "__main__":
         sys.exit('Operación sólo puede ser "suma", "resta", ' +
                  '"multiplica" o "divide".')
     print(resultado)
-
